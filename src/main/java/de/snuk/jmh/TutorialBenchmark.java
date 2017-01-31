@@ -50,7 +50,7 @@ import org.openjdk.jmh.infra.Blackhole;
  * @author snuk
  *
  */
-public class MyBenchmark {
+public class TutorialBenchmark {
 
 	@State(Scope.Thread)
 	public static class MyState {
