@@ -31,19 +31,6 @@
 
 package de.snuk.jmh;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-import org.openjdk.jmh.infra.Blackhole;
-
 /**
  * Tutorial from http://tutorials.jenkov.com/java-performance/jmh.html
  * 
@@ -52,36 +39,36 @@ import org.openjdk.jmh.infra.Blackhole;
  */
 public class TutorialBenchmark {
 
-	@State(Scope.Thread)
-	public static class MyState {
-		public int a = 1;
-		public int b = 2;
-
-		@Setup(Level.Trial)
-		public void doSetup() {
-			System.out.println("Do Setup");
-		}
-
-		@TearDown(Level.Trial)
-		public void doTearDown() {
-			System.out.println("Do TearDown");
-		}
-	}
-
-	@Benchmark
-	@BenchmarkMode(Mode.Throughput)
-	@OutputTimeUnit(TimeUnit.MINUTES)
-	public int testMethod(final MyState state) {
-		final int sum = state.a + state.b;
-		return sum;
-	}
-
-	@Benchmark
-	public void testMethod2(final Blackhole blackhole) {
-		final int a = 1;
-		final int b = 2;
-		final int sum = a + b;
-		blackhole.consume(sum);
-	}
+	// @State(Scope.Thread)
+	// public static class MyState {
+	// public int a = 1;
+	// public int b = 2;
+	//
+	// @Setup(Level.Trial)
+	// public void doSetup() {
+	// System.out.println("Do Setup");
+	// }
+	//
+	// @TearDown(Level.Trial)
+	// public void doTearDown() {
+	// System.out.println("Do TearDown");
+	// }
+	// }
+	//
+	// @Benchmark
+	// @BenchmarkMode(Mode.Throughput)
+	// @OutputTimeUnit(TimeUnit.MINUTES)
+	// public int testMethod(final MyState state) {
+	// final int sum = state.a + state.b;
+	// return sum;
+	// }
+	//
+	// @Benchmark
+	// public void testMethod2(final Blackhole blackhole) {
+	// final int a = 1;
+	// final int b = 2;
+	// final int sum = a + b;
+	// blackhole.consume(sum);
+	// }
 
 }

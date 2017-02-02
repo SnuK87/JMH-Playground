@@ -16,21 +16,22 @@ public class StringBenchmark {
 	public static class MyState {
 		String a = "Hello";
 		String b = "World";
+		String c = "!";
 	}
 
 	@Benchmark
 	@BenchmarkMode(Mode.Throughput)
-	@OutputTimeUnit(TimeUnit.MINUTES)
+	@OutputTimeUnit(TimeUnit.SECONDS)
 	public void testPlusOperator(final MyState state, final Blackhole blackhole) {
-		final String result = state.a + state.b;
+		final String result = state.a + state.b + state.c;
 		blackhole.consume(result);
 	}
 
 	@Benchmark
 	@BenchmarkMode(Mode.Throughput)
-	@OutputTimeUnit(TimeUnit.MINUTES)
+	@OutputTimeUnit(TimeUnit.SECONDS)
 	public void testConcat(final MyState state, final Blackhole blackhole) {
-		final String result = state.a.concat(state.b);
+		final String result = state.a.concat(state.b).concat(state.c);
 		blackhole.consume(result);
 	}
 
