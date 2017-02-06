@@ -1,5 +1,6 @@
 package de.snuk.jmh;
 
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.Benchmark;
@@ -25,12 +26,34 @@ public class IntegerCheckBenchmark {
 		}
 
 		for (int i = 0; i < arg.length(); i++) {
-			if (!Character.isDigit(arg.charAt(i))) {
+			if (Character.digit(arg.charAt(i), 10) < 0) {
 				return false;
 			}
+
+			if ((i == 0) && (arg.charAt(i) == '-')) {
+				if (arg.length() == 1) {
+					return false;
+				} else {
+					continue;
+				}
+			}
+
 		}
 
 		return true;
+	}
+
+	@Benchmark
+	@BenchmarkMode(Mode.Throughput)
+	@OutputTimeUnit(TimeUnit.SECONDS)
+	public boolean scannerCheck() {
+		final Scanner scanner = new Scanner(arg.trim());
+		if (!scanner.hasNextInt(10)) {
+			return false;
+		}
+
+		scanner.nextInt(10);
+		return !scanner.hasNext();
 	}
 
 	@Benchmark
